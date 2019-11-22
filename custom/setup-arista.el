@@ -8,15 +8,15 @@
 (load-library "Arastra")
 
 ;; a4-gid bindings
-(global-set-key (kbd "M-[") 'a4-gid-defs)
-(global-set-key (kbd "M-]") 'a4-gid)
-(global-set-key (quote [M-return]) (quote a4-gid-repeat))
-(global-set-key (kbd "M-'") 'a4-gid-go-back)
-(global-set-key (kbd "M-;") 'a4-gid-kill)
+;; (global-set-key (kbd "M-[") 'a4-gid-defs)
+;; (global-set-key (kbd "M-]") 'a4-gid)
+;; (global-set-key (quote [M-return]) (quote a4-gid-repeat))
+;; (global-set-key (kbd "M-'") 'a4-gid-go-back)
+;; (global-set-key (kbd "M-;") 'a4-gid-kill)
 
-(global-set-key (quote [M-up]) (quote previous-error))
-(global-set-key (quote [M-down]) (quote next-error))
-(setq a4-gid-highlight-target)
+;; (global-set-key (quote [M-up]) (quote previous-error))
+;; (global-set-key (quote [M-down]) (quote next-error))
+;; (setq a4-gid-highlight-target)
 
 ;; support imenu navigation in TAC mode
 (add-hook 'tac-mode-hook
