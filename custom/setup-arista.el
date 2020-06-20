@@ -7,6 +7,8 @@
 ;; load Arastra library
 (load-library "Arastra")
 
+(global-set-key (kbd "C-c e") 'a4-edit)
+
 ;; a4-gid bindings
 ;; (global-set-key (kbd "M-[") 'a4-gid-defs)
 ;; (global-set-key (kbd "M-]") 'a4-gid)
@@ -17,6 +19,9 @@
 ;; (global-set-key (quote [M-up]) (quote previous-error))
 ;; (global-set-key (quote [M-down]) (quote next-error))
 ;; (setq a4-gid-highlight-target)
+
+;; Disable aformat autocorrect
+(setq aformat-autocorrect nil)
 
 ;; support imenu navigation in TAC mode
 (add-hook 'tac-mode-hook
