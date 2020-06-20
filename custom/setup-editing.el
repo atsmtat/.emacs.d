@@ -76,10 +76,20 @@
   :config
   (volatile-highlights-mode t))
 
-
 ;; PACKAGE: undo-tree
 (use-package undo-tree
   :ensure t)
 (global-undo-tree-mode)
 (global-set-key (kbd "C-x >") (kbd "C-u 8 C-x ^"))
 (global-set-key (kbd "C-x <") (kbd "C-u - 8 C-x ^"))
+
+;; PACKAGE: string-inflection
+(use-package string-inflection
+  :ensure t
+  :bind (("C-c i" . string-inflection-cycle)
+	 ("C-c C" . string-inflection-camelcase))
+  )
+
+;; PACKAGE: rust-mode
+(use-package rust-mode
+  :ensure t )
