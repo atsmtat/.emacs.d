@@ -4,3 +4,5 @@ ido.last
 server/
 tramp
 transient/
+auto-save-list/
+*~
