@@ -3,17 +3,6 @@
 (setq scroll-step            1
       scroll-conservatively  10000)
 
-;; PACKAGE: ido
-(require 'ido)
-
-(setq ido-enable-prefix nil)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(setq ido-use-filename-at-point 'guess)
-(setq ido-create-new-buffer 'always)
-
-(ido-mode 1)
-
 ;; PACKAGE: org
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
@@ -34,3 +23,18 @@
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   )
+
+(require 'helm)
+(require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+
+(helm-mode 1)
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))

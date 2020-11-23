@@ -4,7 +4,7 @@
 ;; add MELPA package archive
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; install use-package if it's not installed already
@@ -37,7 +37,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit zenburn-theme volatile-highlights use-package undo-tree string-inflection spacemacs-theme rust-mode rebox2 duplicate-thing ace-window))))
+    (markdown-mode helm magit zenburn-theme volatile-highlights use-package undo-tree string-inflection spacemacs-theme rust-mode rebox2 duplicate-thing ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
