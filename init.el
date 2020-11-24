@@ -23,6 +23,10 @@
   :ensure t)
 (load-theme 'zenburn t)
 
+;; buffer management
+;; use ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; load modules
 ;; load this only on arista server
 (when (and (getenv "HOSTNAME") (string-match "arista" (getenv "HOSTNAME")))
