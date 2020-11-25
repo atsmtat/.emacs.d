@@ -24,13 +24,24 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   )
 
-(require 'helm)
+;; PACKAGE: helm
+(use-package helm
+  :ensure t)
 (require 'helm-config)
+
+;; rebind helm-command-prefix from "C-x c" to "C-c h"
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
+(global-set-key (kbd "M-x") 'helm-M-x)
+
+(setq helm-autoresize-max-height 0)
+(setq helm-autoresize-min-height 20)
+(helm-autoresize-mode 1)
+
 (helm-mode 1)
 
+;; PACKAGE: markdown
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
