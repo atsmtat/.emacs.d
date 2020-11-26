@@ -34,6 +34,15 @@
 (global-unset-key (kbd "C-x c"))
 
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x b") 'helm-mini)
+
+;; rebind tab to run persistent action
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+;; list actions using C-j
+(define-key helm-map (kbd "C-j")  'helm-select-action)
+
+(setq helm-split-window-in-side-p t )
 
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 20)
