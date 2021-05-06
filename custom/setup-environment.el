@@ -1,6 +1,7 @@
 (provide 'setup-environment)
 
 ;; shell setup
+(require 'shell)
 (defun my-comint-send-input-maybe ()
   "Only `comint-send-input' when point is after the latest prompt.
 Otherwise move to the end of the buffer."
