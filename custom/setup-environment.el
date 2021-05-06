@@ -1,12 +1,23 @@
 (provide 'setup-environment)
 
-(setq scroll-step            1
-      scroll-conservatively  10000)
+;; shell setup
+(defun my-comint-send-input-maybe ()
+  "Only `comint-send-input' when point is after the latest prompt.
+Otherwise move to the end of the buffer."
+  (interactive)
+  (let ((proc (get-buffer-process (current-buffer))))
+    (if (and proc (>= (point) (marker-position (process-mark proc))))
+        (comint-send-input)
+      (goto-char (point-max)))))
+
+(with-eval-after-load "comint"
+  (define-key shell-mode-map [remap comint-send-input] 'my-comint-send-input-maybe))
 
 ;; PACKAGE: org
 (require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
 (setq org-log-done t)
 
 (setq org-agenda-files ( list "~/Org/Projects.org" ) )
