@@ -60,3 +60,16 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+;; Setup term
+(use-package term
+  :preface
+  (defun mp-term-custom-settings ()
+    (local-set-key (kbd "M-p") 'term-send-up)
+    (local-set-key (kbd "M-n") 'term-send-down))
+  :config
+  (add-hook 'term-load-hook 'mp-term-custom-settings)
+  (define-key term-raw-map (kbd "M-x") 'helm-M-x)
+  (define-key term-raw-map (kbd "M-o") 'ace-window)
+  (define-key term-raw-map (kbd "M-p") 'term-send-up)
+  (define-key term-raw-map (kbd "M-n") 'term-send-down))

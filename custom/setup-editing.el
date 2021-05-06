@@ -90,6 +90,22 @@
 	 ("C-c C" . string-inflection-camelcase))
   )
 
+;; PACKAGE: company
+(use-package company
+  :ensure t
+  :config
+  (company-mode t)
+  (add-hook 'after-init-hook 'global-company-mode))
+
 ;; PACKAGE: rust-mode
 (use-package rust-mode
-  :ensure t )
+  :ensure t
+  :config
+  ;; Use space instead of TAB for indentation
+  (add-hook 'rust-mode-hook
+	    (lambda () (setq indent-tabs-mode nil)))
+  ;; Run rustfmt upon saving
+  (setq rust-format-on-save t))
+
+;; bind fill region
+(global-set-key (kbd "C-c C-f") 'fill-region)
