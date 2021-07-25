@@ -67,45 +67,92 @@
 
 ;; PACKAGE: duplicate-thing
 (use-package duplicate-thing
-  :ensure t
+  :straight t
   :bind ("M-c" . duplicate-thing))
 
 ;; PACKAGE: volatile-highlights
 (use-package volatile-highlights
-  :ensure t
+  :straight t
   :config
   (volatile-highlights-mode t))
 
 ;; PACKAGE: undo-tree
 (use-package undo-tree
-  :ensure t)
+  :straight t)
 (global-undo-tree-mode)
 (global-set-key (kbd "C-x >") (kbd "C-u 8 C-x ^"))
 (global-set-key (kbd "C-x <") (kbd "C-u - 8 C-x ^"))
 
 ;; PACKAGE: string-inflection
 (use-package string-inflection
-  :ensure t
+  :straight t
   :bind (("C-c i" . string-inflection-cycle)
 	 ("C-c C" . string-inflection-camelcase))
   )
 
 ;; PACKAGE: company
 (use-package company
-  :ensure t
+  :straight t
   :config
   (company-mode t)
-  (add-hook 'after-init-hook 'global-company-mode))
-
-;; PACKAGE: rust-mode
-(use-package rust-mode
-  :ensure t
-  :config
-  ;; Use space instead of TAB for indentation
-  (add-hook 'rust-mode-hook
-	    (lambda () (setq indent-tabs-mode nil)))
-  ;; Run rustfmt upon saving
-  (setq rust-format-on-save t))
+  (add-hook 'after-init-hook 'global-company-mode)
+  :bind
+  (:map company-active-map
+	      ("C-n" . company-select-next)
+	      ("C-p" . company-select-previous)
+	      ("M-<" . company-select-first)
+	      ("M->" . company-select-last)))
 
 ;; bind fill region
 (global-set-key (kbd "C-c C-f") 'fill-region)
+
+;; PACKAGE: lsp-mode
+(use-package lsp-mode
+  :straight t
+  :commands lsp
+  :custom
+  ;; rust-analyzer settings lifted from
+  ;; https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
+  ;;
+  ;; what to use when checking on-save. "check" is default, I prefer clippy
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
+  (lsp-rust-analyzer-rustc-source "discover")
+  (lsp-rust-analyzer-server-command "~/.cargo/bin/rust-analyzer")
+  ;; deactivate documentation showed in mini buffer
+  (lsp-eldoc-hook nil)
+  (lsp-idle-delay 0.6)
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+;;; PACKAGE: lsp-ui
+(use-package lsp-ui
+  :straight t
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-doc-enable nil))
+
+;; PACKAGE: rustic
+(use-package rustic
+  :straight t
+  :bind (:map rustic-mode-map
+              ("M-j" . lsp-ui-imenu)
+              ("M-?" . lsp-find-references)
+              ("C-c C-c l" . flycheck-list-errors)
+              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c r" . lsp-rename)
+              ("C-c C-c q" . lsp-workspace-restart)
+              ("C-c C-c Q" . lsp-workspace-shutdown)
+              ("C-c C-c s" . lsp-rust-analyzer-status))
+  :config
+  ;; Use space instead of TAB for indentation
+  (add-hook 'rustic-mode-hook
+	    (lambda () (setq indent-tabs-mode nil)))
+  ;; Run rustfmt upon saving
+  ;; (setq rustic-format-on-save t)
+  )
+
+;; PACKAGE: flycheck
+(use-package flycheck
+  :straight t)

@@ -23,14 +23,18 @@ Otherwise move to the end of the buffer."
 
 (setq org-agenda-files ( list "~/Org/Projects.org" ) )
 
+;; PACKAGE: project
+(use-package project
+  :straight t)
+
 ;; PACKAGE: magit
 (use-package magit
-  :ensure t)
+  :straight t)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; PACKAGE: ace-window
 (use-package ace-window
-  :ensure t
+  :straight t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -38,7 +42,7 @@ Otherwise move to the end of the buffer."
 
 ;; PACKAGE: helm
 (use-package helm
-  :ensure t)
+  :straight t)
 (require 'helm-config)
 
 ;; rebind helm-command-prefix from "C-x c" to "C-c h"
@@ -66,7 +70,7 @@ Otherwise move to the end of the buffer."
 
 ;; PACKAGE: markdown
 (use-package markdown-mode
-  :ensure t
+  :straight t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)

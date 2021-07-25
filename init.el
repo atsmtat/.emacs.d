@@ -1,28 +1,33 @@
 ;; y or n 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; add MELPA package archive
-(require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-;; install use-package if it's not installed already
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-
-;; add custom module path
-(add-to-list 'load-path "~/.emacs.d/custom/")
-
 ;; disable menu bar
 (menu-bar-mode -1)
 
+;; bootstrap package manager straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; install use-package
+(straight-use-package 'use-package)
+
 ;; set up theme
 (use-package zenburn-theme
-  :ensure t)
+  :straight t)
 (load-theme 'zenburn t)
+
+;; add custom module path
+(add-to-list 'load-path "~/.emacs.d/custom/")
 
 ;; buffer management
 ;; use ibuffer
@@ -35,16 +40,3 @@
 )
 (require 'setup-editing)
 (require 'setup-environment)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(markdown-mode helm magit zenburn-theme volatile-highlights use-package undo-tree string-inflection spacemacs-theme rust-mode rebox2 duplicate-thing ace-window)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
