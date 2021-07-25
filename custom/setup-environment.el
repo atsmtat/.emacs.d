@@ -23,9 +23,7 @@ Otherwise move to the end of the buffer."
 
 (setq org-agenda-files ( list "~/Org/Projects.org" ) )
 
-;; PACKAGE: project
-(use-package project
-  :straight t)
+(straight-use-package 'project)
 
 ;; PACKAGE: magit
 (use-package magit

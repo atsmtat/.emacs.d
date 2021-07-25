@@ -38,5 +38,5 @@
 (when (and (getenv "HOSTNAME") (string-match "arista" (getenv "HOSTNAME")))
   (require 'setup-arista)
 )
-(require 'setup-editing)
 (require 'setup-environment)
+(require 'setup-editing)
