@@ -23,7 +23,13 @@ Otherwise move to the end of the buffer."
 
 (setq org-agenda-files ( list "~/Org/Projects.org" ) )
 
-(straight-use-package 'project)
+;; workaround for straight issue: https://github.com/raxod502/straight.el/issues/822
+;; where I think magit expects a newer version of project. C-n in magit fails with
+;; "Symbol's value as variable is void: project-switch-commands" error, otherwise.
+(unload-feature 'project t)
+(use-package project
+  :straight t)
+(require 'project)
 
 ;; PACKAGE: magit
 (use-package magit
