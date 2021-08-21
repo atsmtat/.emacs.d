@@ -26,7 +26,7 @@ Otherwise move to the end of the buffer."
 ;; workaround for straight issue: https://github.com/raxod502/straight.el/issues/822
 ;; where I think magit expects a newer version of project. C-n in magit fails with
 ;; "Symbol's value as variable is void: project-switch-commands" error, otherwise.
-(unload-feature 'project t)
+(if (featurep 'project) (unload-feature 'project t))
 (use-package project
   :straight t)
 (require 'project)
