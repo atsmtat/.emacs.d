@@ -44,6 +44,15 @@ Otherwise move to the end of the buffer."
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   )
 
+;; PACKAGE: avy
+(use-package avy
+  :straight t
+  :bind (("M-g ;" . avy-goto-char)
+         ("M-g '" . avy-goto-char-2)
+         ("M-g g" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1))
+  )
+
 ;; PACKAGE: helm
 (use-package helm
   :straight t)
@@ -93,3 +102,14 @@ Otherwise move to the end of the buffer."
   (define-key term-raw-map (kbd "M-o") 'ace-window)
   (define-key term-raw-map (kbd "M-p") 'term-send-up)
   (define-key term-raw-map (kbd "M-n") 'term-send-down))
+
+;; Make Compilation to scroll to the first error
+(setq compilation-scroll-output 'first-error)
+
+;; PACKAGE: projectile
+(use-package projectile
+  :straight t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map)))
