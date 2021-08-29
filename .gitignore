@@ -6,3 +6,9 @@ tramp
 transient/
 auto-save-list/
 *~
+.cache/
+.lsp*
+straight/
+recentf
+projects
+projectile-bookmarks*
