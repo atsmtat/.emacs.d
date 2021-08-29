@@ -55,3 +55,15 @@
 ;; (add-hook 'after-change-major-mode-hook 'fci-mode)
 
 
+(require 'bug-mode)
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(tac-mode . "tac"))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "artaclsp")
+                    :major-modes '(tac-mode)
+                    :server-id 'artaclsp)))
+
+(add-hook 'tac-mode-hook #'lsp)
+

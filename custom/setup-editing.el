@@ -118,11 +118,17 @@
   (lsp-rust-analyzer-cargo-watch-command "clippy")
   (lsp-rust-analyzer-rustc-source "discover")
   (lsp-rust-analyzer-server-command "~/.cargo/bin/rust-analyzer")
+
+  ;; clangd settings
+  ;; (lsp-clangd-binary-path "/usr/bin/clangd")
+  ;; (lsp-clients-clangd-args "-j=7")
   ;; deactivate documentation showed in mini buffer
   (lsp-eldoc-hook nil)
   (lsp-idle-delay 0.6)
   :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode 'c++-mode-hook)
+  (setq lsp-clients-clangd-args '("-j=4"))
+  (setq lsp-clangd-binary-path "/usr/bin/clangd"))
 
 ;;; PACKAGE: lsp-ui
 (use-package lsp-ui
@@ -155,4 +161,8 @@
 
 ;; PACKAGE: flycheck
 (use-package flycheck
+  :straight t)
+
+;; PACKAGE: protobuf-mode
+(use-package protobuf-mode
   :straight t)
