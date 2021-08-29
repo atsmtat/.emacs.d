@@ -112,6 +112,6 @@ Otherwise move to the end of the buffer."
   :init
   (projectile-mode +1)
   :config
-  (setq projectile-project-search-path '("~/Rust/" "/src/"))
+  (setq projectile-project-search-path '("~/Rust/"))
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)))
