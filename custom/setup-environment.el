@@ -88,7 +88,10 @@ Otherwise move to the end of the buffer."
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown")
+  :config
+  (add-hook 'markdown-mode-hook 'auto-fill-mode)
+  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 85) )))
 
 ;; Setup term
 (use-package term
@@ -115,3 +118,13 @@ Otherwise move to the end of the buffer."
   (setq projectile-project-search-path '("~/Rust/"))
   :bind (:map projectile-mode-map
               ("C-c p" . projectile-command-map)))
+
+;; PACKAGE: transpose-frame
+(use-package transpose-frame
+  :straight t)
+
+;; PACKAGE: which-key
+(use-package which-key
+  :straight t
+  :config
+  (which-key-mode))

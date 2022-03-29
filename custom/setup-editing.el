@@ -18,7 +18,7 @@
   (interactive)
   (transpose-lines 1)
   (forward-line -2))
-(global-set-key (kbd "ESC <up>") 'move-line-up)
+(global-set-key (kbd "M-<up>") 'move-line-up)
 
 ;; line move down
 (defun move-line-down ()
@@ -26,7 +26,7 @@
   (forward-line 1)
   (transpose-lines 1)
   (forward-line -1))
-(global-set-key (kbd "ESC <down>") 'move-line-down)
+(global-set-key (kbd "M-<down>") 'move-line-down)
 
 ;; setup copy without selection
 (defun get-point (symbol &optional arg)
@@ -110,6 +110,8 @@
 (use-package lsp-mode
   :straight t
   :commands lsp
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :custom
   ;; rust-analyzer settings lifted from
   ;; https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
@@ -126,9 +128,14 @@
   (lsp-eldoc-hook nil)
   (lsp-idle-delay 0.6)
   :config
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode 'c++-mode-hook)
   (setq lsp-clients-clangd-args '("-j=4"))
-  (setq lsp-clangd-binary-path "/usr/bin/clangd"))
+  (setq lsp-clangd-binary-path "/usr/bin/clangd")
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration))
+
+(add-hook 'c++-mode-hook #'lsp)
 
 ;;; PACKAGE: lsp-ui
 (use-package lsp-ui
