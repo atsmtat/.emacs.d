@@ -1,10 +1,7 @@
 (provide 'setup-arista)
 
-;; setup server name
-(if (getenv "WP")
-    (setq server-name (getenv "WP")))
-
 ;; load Arastra library
+(setq arastra-server-start nil)
 (load-library "Arastra")
 
 (global-set-key (kbd "C-c e") 'a4-edit)

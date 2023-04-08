@@ -130,7 +130,7 @@
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode 'c++-mode-hook)
-  (setq lsp-clients-clangd-args '("-j=4"))
+  (setq lsp-clients-clangd-args '("-j=4" "--header-insertion=never"))
   (setq lsp-clangd-binary-path "/usr/bin/clangd")
   :hook
   (lsp-mode . lsp-enable-which-key-integration))
@@ -143,7 +143,7 @@
   :commands lsp-ui-mode
   :custom
   (lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-sideline-mode nil)
   (lsp-ui-doc-enable nil))
 
 ;; PACKAGE: rustic
@@ -173,3 +173,27 @@
 ;; PACKAGE: protobuf-mode
 (use-package protobuf-mode
   :straight t)
+
+;; PACKAGE: dockerfile-mode
+(use-package dockerfile-mode
+  :straight t
+  :mode "\\.Dockerfile$")
+
+;; PACKAGE: yaml-mode
+(use-package yaml-mode
+  :straight t
+  :mode "\\.yml$")
+
+;; tree-sitter setup
+;; (use-package tree-sitter
+;;   :straight t)
+
+;; (use-package tree-sitter-langs
+;;   :straight t)
+
+;; (setq tsc-dyn-get-from (:compilation))
+;; (require 'tree-sitter)
+;; (require 'tree-sitter-langs)
+;; (global-tree-sitter-mode)
+;; (add-to-list 'tree-sitter-major-mode-language-alist '(tac-mode . tac))
+;; (add-hook 'tac-mode-hook #'tree-sitter-hl-mode)
