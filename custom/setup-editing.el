@@ -4,6 +4,8 @@
 (define-key global-map "\M-n" (lambda () (interactive) (next-line 5)))
 (define-key global-map "\M-p" (lambda () (interactive) (previous-line 5)))
 
+(electric-pair-mode 1)
+
 ;; goto matching counterpart of current parenthesis
 (defun paren-match ()                                                  
   "Tries to jump to the matching parenthesis to the one currently      
@@ -78,7 +80,9 @@
 
 ;; PACKAGE: undo-tree
 (use-package undo-tree
-  :straight t)
+  :straight t
+  :custom
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 (global-undo-tree-mode)
 (global-set-key (kbd "C-x >") (kbd "C-u 8 C-x ^"))
 (global-set-key (kbd "C-x <") (kbd "C-u - 8 C-x ^"))
@@ -162,8 +166,6 @@
   ;; Use space instead of TAB for indentation
   (add-hook 'rustic-mode-hook
 	    (lambda () (setq indent-tabs-mode nil)))
-  ;; Run rustfmt upon saving
-  ;; (setq rustic-format-on-save t)
   )
 
 ;; PACKAGE: flycheck

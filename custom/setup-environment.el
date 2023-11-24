@@ -14,6 +14,11 @@ Otherwise move to the end of the buffer."
 (with-eval-after-load "comint"
   (define-key shell-mode-map [remap comint-send-input] 'my-comint-send-input-maybe))
 
+(defun my-comint-init ()
+  ;; don't echo shell commands
+  (setq comint-process-echoes t))
+(add-hook 'comint-mode-hook 'my-comint-init)
+
 ;; PACKAGE: org
 (require 'org)
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -56,7 +61,6 @@ Otherwise move to the end of the buffer."
 ;; PACKAGE: helm
 (use-package helm
   :straight t)
-(require 'helm-config)
 
 ;; rebind helm-command-prefix from "C-x c" to "C-c h"
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
@@ -128,3 +132,9 @@ Otherwise move to the end of the buffer."
   :straight t
   :config
   (which-key-mode))
+
+;; PACKAGE: ledger
+(use-package ledger-mode
+  :straight t)
+(use-package flycheck-ledger
+  :straight t)
